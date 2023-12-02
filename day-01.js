@@ -1013,9 +1013,10 @@ const replaceNumericStrings = (input) => [
 
 const result = input
   .split('\n')
-  .map(x => replaceNumericStrings(x))
-  .map(x => [...x].filter(x => !isNaN(x)))
-  .map(x => +(x[0] + x[x.length - 1]))
-  .reduce((a, b) => a + b, 0);
+  .reduce((total, line) => {
+    const replaced = replaceNumericStrings(line);
+    const digits = [...replaced].filter(x => !isNaN(x));
+    return total + +(digits[0] + digits[digits.length - 1]);
+  }, 0);
 
 console.log(`Result: ${result}`);
