@@ -1,24 +1,4 @@
-const replacementsDictionary = [
-  ['one', 'o1e'],
-  ['two', 't2o'],
-  ['three', 't3e'],
-  ['four', 'f4r'],
-  ['five', 'f5e'],
-  ['six', 's6x'],
-  ['seven', 's7n'],
-  ['eight', 'e8t'],
-  ['nine', 'n9e'],
-];
-
-const replaceStrings = (input) => {
-  var x = new String(input);
-  replacementsDictionary.forEach((replacement) => {
-    x = x.replaceAll(replacement[0], replacement[1]);
-  });
-  return x;
-}
-
-`jjfvnnlfivejj1
+const input = `jjfvnnlfivejj1
 6fourfour
 ninevbmltwo69
 pcg91vqrfpxxzzzoneightzt
@@ -1017,4 +997,25 @@ lpncsfkn7fsgvkl
 81s
 2four3threesxxvlfqfive4
 nine6eightsevenzx9twoxc
-hmbfjdfnp989mfivefiverpzrjs`.split('\n').map(x => replaceStrings(x)).map(x => [...x].filter(x => !isNaN(x))).map(x => +(x[0] + x[x.length - 1])).reduce((a, b) => a + b, 0)
+hmbfjdfnp989mfivefiverpzrjs`;
+
+const replaceNumericStrings = (input) => [
+  ['one', 'o1e'],
+  ['two', 't2o'],
+  ['three', 't3e'],
+  ['four', 'f4r'],
+  ['five', 'f5e'],
+  ['six', 's6x'],
+  ['seven', 's7n'],
+  ['eight', 'e8t'],
+  ['nine', 'n9e'],
+].reduce((acc, x) => acc.replaceAll(x[0], x[1]), input);
+
+const result = input
+  .split('\n')
+  .map(x => replaceNumericStrings(x))
+  .map(x => [...x].filter(x => !isNaN(x)))
+  .map(x => +(x[0] + x[x.length - 1]))
+  .reduce((a, b) => a + b, 0);
+
+console.log(`Result: ${result}`);
